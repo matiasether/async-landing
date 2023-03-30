@@ -1,4 +1,6 @@
+var ghpages = require('gh-pages');
 
+ghpages.publish('dist', function(err) {});
 const API='https://youtube-v31.p.rapidapi.com/search?channelId=UC55-mxUj5Nj3niXFReG44OQ&part=snippet%2Cid&order=date&maxResults=5';
 const content = null || document.getElementById('content')
 const options = {
