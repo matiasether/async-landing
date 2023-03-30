@@ -1,5 +1,5 @@
 
-const API='https://youtube-v31.p.rapidapi.com/search?channelId=UCw05fUBPwmpu-ehXFMqfdMw&part=snippet%2Cid&order=date&maxResults=9';
+const API='https://youtube-v31.p.rapidapi.com/search?channelId=UC55-mxUj5Nj3niXFReG44OQ&part=snippet%2Cid&order=date&maxResults=5';
 const content = null || document.getElementById('content')
 const options = {
 	method: 'GET',
@@ -15,15 +15,18 @@ const fetchData = async (urlApi) => {
     return data
 }
 (async () => {
-    try {
-      const videos = await fetchData(API);
-      let view = `
+  try {
+    const videos = await fetchData(API);
+    let view = `
       ${videos.items.map(video => `
         <div class="group relative">
-          <div
-            class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
-            <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.description}" class="w-full">
-          </div>
+          <a href="https://www.youtube.com/watch?v=${video.id.videoId}"
+             target="_blank"
+             class="w-full bg-gray-200 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:aspect-none">
+            <img src="${video.snippet.thumbnails.high.url}"
+                 alt="${video.snippet.description}"
+                 class="w-full">
+          </a>
           <div class="mt-4 flex justify-between">
             <h3 class="text-sm text-gray-700">
               <span aria-hidden="true" class="absolute inset-0"></span>
@@ -32,10 +35,9 @@ const fetchData = async (urlApi) => {
           </div>
         </div>
       `).slice(0,4).join('')}
-  
-      `;
-      content.innerHTML = view;
-    } catch (error) {
-        console.log(error)
-    }
-  })();
+    `;
+    content.innerHTML = view;
+  } catch (error) {
+    console.log(error)
+  }
+})();
